@@ -1,0 +1,103 @@
+# This is steps to use Django in CMD lakshit@agamasolutions.com
+Step 1 Creating Virtual Environment
+	once u r in directory where you want to create vertual Environment
+	cmd in search bar
+	cd Pavan\Python\Codes
+	py -m venv django  # django is the Virtual Environment
+	django\scripts\activate # this is to activate Newly created Virtual Environment
+	
+	'''
+	Command prompt will look like
+	(django) e:\Pavan\Python\Codes>
+	'''
+	'''
+	django\scripts\deactivate # to move out of Virtual Environment
+	'''
+Step 2 Install Packages (Django)
+	
+	pip install django # this is to install Django in Virtual Environment
+	
+	
+Step 3 Create a project
+	
+	django-admin startproject myproject # myproject is the newly create project, we can give any name, Can be seen in folder
+	cd myproject # to be in newly created project
+Step 4 Create Database	and super user
+	python manage.py migrate # create database 
+	python manage.py createsuperuser # create super user
+	
+	Username (leave blank to use 'z820'): pavneet # Super user name
+	Email address: pghai01@yahoo.com # Super user email
+	Password: 123456 # this will be hiden 
+	Password (again): 123456 # this will be hiden 
+	This password is too short. It must contain at least 8 characters.
+	This password is too common.
+	This password is entirely numeric.
+	Bypass password validation and create user anyway? [y/N]: y # this is inbuld validation
+	Superuser created successfully.
+
+Step 5 Run Server
+	python manage.py runserver # this will run server in your local machine, copy http://127.0.0.1:8000/ and paste/go on web browser
+	
+Step 6 Run the project
+	on any web browser at address bar type
+	http://127.0.0.1:8000/ # you will see the running page
+	http://127.0.0.1:8000/admin # to enter in admin panel enter credintials of super user
+		Username: pavneet
+		Password: 123456
+		
+		'''
+		if you see Authentication and Authorization and user 
+		means it good, all done
+		'''
+Step 7 creating new App (single feature or group, form, blog, etc)
+	#drag myproject folder in Visual Studio Code Editor
+	
+	# go back to cmd and press 
+	Ctrl+c # to Quit the server
+	in CMD under: django) e:\Pavan\Python\Codes\myproject>
+	python manage.py startapp helloworld # helloworld is the app name (can be any name)
+
+Step 8 go to Visual Studio Code editor
+	Step-8A under helloworld --> views.py
+	# Check helloworld folder is created 
+	# within helloworld locate views.py
+	# you will see following codes 
+		from django.shortcuts import render
+		
+		# Create your views here.
+		# create a msg that returns hello world 
+		# return in Http response 
+		from django.http import HttpResponse # import Capital H and R 
+		
+		def hello(request): # We need to connect this function to some URL
+			return HttpResponse("Hello World!) # this will return Hello World
+			
+	Step8B under myproject --- > urls.py # this is to connect out hello function 
+		# Add come codes to existing default codes
+		
+		from helloworld.views import hello # helloworld.views (foldername.filename) import (Functionname)
+		
+		# under urlpatterns  add list element below that is present
+		path('admin/', admin.site.urls), # Already present
+		path('',hello), # Newly added , giving '' as this points to index.html default 
+		
+	'''
+	# Check if working
+	# go to CMD
+	python manage.py runserver
+	# go to web browser type 
+	127.0.0.1:8000 # Local server address, 
+	#You will see 
+	# Hello World # this is plan text, if you wish to see as paragraph (Bold) 
+	# change in function hello, to do some
+	# go to helloworld --> views.py in  hello function 
+	# replace return HttpResponse('Hello World!') with 
+	return HttpResponse('<h1>Hello World!</h1>') # add html tags 
+	
+	# Now as the server is already running go to web browser and refresh
+	# you will see html in Bold 
+	'''
+	
+	
+	
